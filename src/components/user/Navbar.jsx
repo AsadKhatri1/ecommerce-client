@@ -1,8 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { IoSearchOutline } from "react-icons/io5";
 
 const Navbar = () => {
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+  // submit handler
+  const submitHandler = (e) => {
+    e.preventDefault();
+    navigate(`/product/search/${search}`);
+    setSearch("");
+  };
   return (
     <div>
       <div className="nav sticky-top">
@@ -10,10 +18,15 @@ const Navbar = () => {
           <Link to={"/"} className="left" style={{ textDecoration: "none" }}>
             <h3 className="text-white">E-Commerce</h3>
           </Link>
-          <div className="search_bar">
-            <IoSearchOutline className="mx-2" />{" "}
-            <input type="text" placeholder="Search..." />
-          </div>
+          <form className="search_bar" onSubmit={submitHandler}>
+            <IoSearchOutline className="mx-2" onClick={submitHandler} />{" "}
+            <input
+              type="text"
+              placeholder="Search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </form>
           <div className="right">
             <button className="btn btn-warning mx-2">Cart</button>
             <button className="btn btn-warning mx-2">Profile</button>

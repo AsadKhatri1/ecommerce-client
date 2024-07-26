@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AppContext from "./AppContext";
 import axios from "axios";
 const AppState = (props) => {
-  const url = "http://localhost:1000/api";
+  const url = "https://ecommerce-2ijh.onrender.com/api";
 
   const [products, setProducts] = useState([]);
 
@@ -15,7 +15,6 @@ const AppState = (props) => {
       });
 
       setProducts(api.data.products);
-      console.log(products);
     };
     fetchProducts();
   }, []);

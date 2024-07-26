@@ -5,7 +5,7 @@ import RelatedProduct from "./RelatedProduct";
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
-  const url = "http://localhost:1000/api";
+  const url = "https://ecommerce-2ijh.onrender.com/api";
 
   //   fetching single product
   useEffect(() => {
@@ -18,7 +18,6 @@ const ProductDetail = () => {
       //   setProduct(api.data.products);
 
       setProduct(api.data.product);
-      console.log(product);
     };
     fetchProducts();
   }, [id]);

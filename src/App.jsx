@@ -6,6 +6,7 @@ import ShowProducts from "./components/product/ShowProducts";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductDetail from "./components/product/ProductDetail";
 import Navbar from "./components/user/Navbar";
+import SearchedProduct from "./components/product/SearchedProduct";
 function App() {
   return (
     <>
@@ -16,6 +17,10 @@ function App() {
           <Route
             path="/product/:id"
             element={<ProductDetail></ProductDetail>}
+          ></Route>
+          <Route
+            path="/product/search/:term"
+            element={<SearchedProduct></SearchedProduct>}
           ></Route>
         </Routes>
       </Router>
