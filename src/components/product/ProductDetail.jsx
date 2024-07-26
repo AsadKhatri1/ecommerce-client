@@ -26,7 +26,7 @@ const ProductDetail = () => {
     <>
       <div className="d-flex align-items-center justify-content-center my-5">
         <div className="row container">
-          <div className="left col-md-4">
+          <div className="left col-md-4 text-center my-2">
             <img
               src={product.imgSrc}
               alt=""
@@ -38,7 +38,7 @@ const ProductDetail = () => {
               }}
             />
           </div>
-          <div className="left col-md-8 text-center d-flex align-items-center flex-column justify-content-center">
+          <div className="left col-md-8 text-center d-flex align-items-center flex-column justify-content-center p-3">
             <h1>{product?.title}</h1>
             <p>{product?.category}</p>
             <h6>{product?.description}</h6>

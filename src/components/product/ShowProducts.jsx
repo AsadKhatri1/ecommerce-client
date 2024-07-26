@@ -5,7 +5,7 @@ const ShowProducts = () => {
   const { products } = useContext(AppContext);
   return (
     <>
-      <div className=" container d-flex align-items-center justify-content-center">
+      <div className=" container d-flex align-items-center justify-content-center my-4">
         <div className="row container d-flex align-items-center justify-content-center">
           {products?.map((product) => {
             return (

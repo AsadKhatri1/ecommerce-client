@@ -5,10 +5,12 @@ import "./App.css";
 import ShowProducts from "./components/product/ShowProducts";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductDetail from "./components/product/ProductDetail";
+import Navbar from "./components/user/Navbar";
 function App() {
   return (
     <>
       <Router>
+        <Navbar />
         <Routes>
           <Route path="/" element={<ShowProducts></ShowProducts>}></Route>
           <Route
