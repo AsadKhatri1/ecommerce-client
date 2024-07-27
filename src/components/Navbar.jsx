@@ -4,7 +4,8 @@ import { IoSearchOutline } from "react-icons/io5";
 import AppContext from "../context/AppContext";
 
 const Navbar = () => {
-  const { products, filterData, setFilterData } = useContext(AppContext);
+  const { products, filterData, setFilterData, logout, isAuthenticated } =
+    useContext(AppContext);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -39,15 +40,32 @@ const Navbar = () => {
             />
           </form>
           <div className="right">
-            <button className="btn btn-primary mx-2">Cart</button>
-            <button className="btn btn-info mx-2">Profile</button>
-            <Link to="/login" className="btn btn-light mx-2">
-              Login
-            </Link>
-            <Link to="/register" className="btn btn-warning mx-2">
-              Register
-            </Link>
-            <button className="btn btn-danger mx-2">Logout</button>
+            {isAuthenticated && (
+              <>
+                <button className="btn btn-primary mx-2">Cart</button>
+                <Link to="/profile" className="btn btn-info mx-2">
+                  Profile
+                </Link>
+                <button
+                  className="btn btn-danger mx-2"
+                  onClick={() => {
+                    logout(), navigate("/login");
+                  }}
+                >
+                  Logout
+                </button>
+              </>
+            )}
+            {!isAuthenticated && (
+              <>
+                <Link to="/login" className="btn btn-light mx-2">
+                  Login
+                </Link>
+                <Link to="/register" className="btn btn-warning mx-2">
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
 

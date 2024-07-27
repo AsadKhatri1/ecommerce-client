@@ -12,6 +12,7 @@ import Register from "./components/user/Register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/user/Login";
+import Profile from "./components/user/Profile";
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<ShowProducts></ShowProducts>}></Route>
           <Route path="/register" element={<Register></Register>}></Route>
           <Route path="/login" element={<Login></Login>}></Route>
+          <Route path="/profile" element={<Profile></Profile>}></Route>
           <Route
             path="/product/:id"
             element={<ProductDetail></ProductDetail>}

@@ -27,7 +27,7 @@ const Login = () => {
         email: "",
         password: "",
       });
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", result.token);
 
       toast.success(result.message, {
         position: "top-right",
