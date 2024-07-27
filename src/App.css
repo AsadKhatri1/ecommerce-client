@@ -25,3 +25,23 @@
 .search_bar input:focus {
   outline: none;
 }
+
+.form-input:focus {
+  outline: none;
+}
+.sub_bar {
+  padding: 0px 10px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.sub_bar .items {
+  padding: 10px 15px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.sub_bar .items:hover {
+  background-color: #005cbe;
+}

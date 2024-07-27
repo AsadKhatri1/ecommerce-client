@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AppContext from "../../context/AppContext";
 import { Link } from "react-router-dom";
 const ShowProducts = () => {
-  const { products } = useContext(AppContext);
+  const [loading, setLoading] = useState(true);
+  const { products, filterData } = useContext(AppContext);
+
   return (
     <>
       <div className=" container d-flex align-items-center justify-content-center my-4">
         <div className="row container d-flex align-items-center justify-content-center">
-          {products?.map((product) => {
+          {filterData?.map((product) => {
             return (
               <div
                 key={product._id}
