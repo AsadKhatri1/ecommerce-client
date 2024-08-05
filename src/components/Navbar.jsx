@@ -4,8 +4,9 @@ import { IoSearchOutline } from "react-icons/io5";
 import AppContext from "../context/AppContext";
 
 const Navbar = () => {
-  const { products, filterData, setFilterData, logout, isAuthenticated } =
+  const { products, filterData, setFilterData, logout, isAuthenticated, cart } =
     useContext(AppContext);
+
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,7 +32,7 @@ const Navbar = () => {
             <h3 className="text-white">E-Commerce</h3>
           </Link>
           <form className="search_bar" onSubmit={submitHandler}>
-            <IoSearchOutline className="mx-2" onClick={submitHandler} />{" "}
+            <IoSearchOutline className="mx-2" onClick={submitHandler} />
             <input
               type="text"
               placeholder="Search..."
@@ -42,7 +43,17 @@ const Navbar = () => {
           <div className="right">
             {isAuthenticated && (
               <>
-                <button className="btn btn-primary mx-2">Cart</button>
+                <Link
+                  to={"/cart"}
+                  type="button"
+                  className="btn btn-primary position-relative mx-3"
+                >
+                  <span class="material-symbols-outlined">shopping_cart</span>
+                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {cart?.items.length}
+                  </span>
+                </Link>
+
                 <Link to="/profile" className="btn btn-info mx-2">
                   Profile
                 </Link>

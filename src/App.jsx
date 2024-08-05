@@ -6,6 +6,7 @@ import ShowProducts from "./components/product/ShowProducts";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductDetail from "./components/product/ProductDetail";
 import Navbar from "./components/Navbar";
+import Cart from "./components/Cart";
 import SearchedProduct from "./components/product/SearchedProduct";
 import Register from "./components/user/Register";
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/register" element={<Register></Register>}></Route>
           <Route path="/login" element={<Login></Login>}></Route>
           <Route path="/profile" element={<Profile></Profile>}></Route>
+          <Route path="/cart" element={<Cart></Cart>}></Route>
           <Route
             path="/product/:id"
             element={<ProductDetail></ProductDetail>}

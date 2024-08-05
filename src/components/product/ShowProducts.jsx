@@ -3,7 +3,7 @@ import AppContext from "../../context/AppContext";
 import { Link } from "react-router-dom";
 const ShowProducts = () => {
   const [loading, setLoading] = useState(true);
-  const { products, filterData } = useContext(AppContext);
+  const { products, filterData, addToCart } = useContext(AppContext);
 
   return (
     <>
@@ -42,7 +42,18 @@ const ShowProducts = () => {
                       <button className="btn btn-primary mx-1">
                         Rs. {product.price}
                       </button>
-                      <button className="btn btn-warning mx-1">
+                      <button
+                        className="btn btn-warning mx-1"
+                        onClick={() =>
+                          addToCart(
+                            product._id,
+                            product.title,
+                            1,
+                            product.price,
+                            product.imgSrc
+                          )
+                        }
+                      >
                         Add To cart
                       </button>
                     </div>

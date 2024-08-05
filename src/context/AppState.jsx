@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AppContext from "./AppContext";
 import axios from "axios";
 import { Bounce, toast } from "react-toastify";
+
 const AppState = (props) => {
   const url = "https://ecommerce-2ijh.onrender.com/api";
 
@@ -10,6 +11,8 @@ const AppState = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [filterData, setFilterData] = useState([]);
   const [user, setUser] = useState();
+  const [cart, setCart] = useState();
+  const [reload, setReload] = useState(false);
 
   //   fetching all products as data value to context
   useEffect(() => {
@@ -24,7 +27,8 @@ const AppState = (props) => {
     };
     userProfile();
     fetchProducts();
-  }, [token]);
+    userCart();
+  }, [token, reload]);
 
   // user registeration
 
@@ -98,6 +102,42 @@ const AppState = (props) => {
     setUser(api.data.user);
   };
 
+  // add to cart
+  const addToCart = async (productId, title, qty, price, imgSrc) => {
+    const api = await axios.post(
+      `${url}/cart/add`,
+      { productId, title, qty, price, imgSrc },
+      {
+        headers: { "Content-Type": "Application/json", Auth: token },
+        withCredentials: true,
+      }
+    );
+
+    setReload(!reload);
+
+    toast.success(api.data.message, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+  };
+  // get user cart
+  const userCart = async () => {
+    const api = await axios.get(`${url}/cart/usercart`, {
+      headers: { "Content-Type": "Application/json", Auth: token },
+      withCredentials: true,
+    });
+
+    // console.log(api.data);
+
+    setCart(api.data.cart);
+  };
   return (
     <AppContext.Provider
       value={{
@@ -112,6 +152,8 @@ const AppState = (props) => {
         setFilterData,
         logout,
         user,
+        addToCart,
+        cart,
       }}
     >
       {props.children}
