@@ -16,14 +16,19 @@ const ShowProducts = () => {
                 className=" my-3 col-md-4 d-flex align-items-center justify-content-center "
               >
                 <div
-                  className="card bg-dark text-light text-center p-3"
-                  style={{ width: "18rem" }}
+                  className="card bg-light text-dark my-5 p-1 text-center"
+                  style={{
+                    borderRadius: "8px",
+                    width: "18rem",
+                    boxShadow:
+                      "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+                  }}
                 >
                   <div className="d-flex align-items-center justify-content-center">
                     <Link to={`/product/${product._id}`}>
                       <img
                         src={product.imgSrc}
-                        className="card-img-top"
+                        className="card-img-top mt-2"
                         alt="..."
                         style={{
                           width: "200px",

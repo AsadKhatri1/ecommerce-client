@@ -26,21 +26,30 @@ const Cart = () => {
       {cart?.items?.map((product) => (
         <div
           key={product._id}
-          className="container bg-dark my-5 p-3 text-center"
-          style={{ borderRadius: "8px" }}
+          className="container bg-light my-5 p-1 text-center"
+          style={{
+            borderRadius: "8px",
+            boxShadow:
+              "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+          }}
         >
           <div className="d-flex align-items-center justify-content-around">
             <div className="cart_img">
               <img
                 src={product.imgSrc}
                 alt="Image cart"
-                style={{ width: "100px", height: "100px", borderRadius: "8px" }}
+                style={{
+                  width: "80px",
+                  height: "80px",
+                  borderRadius: "8px",
+                  border: "2px solid yellow",
+                }}
               />
             </div>
-            <div className="cart_desc text-white">
-              <h2>{product.title}</h2>
-              <h4>{product.price}</h4>
-              <h5>QTY: {product.qty}</h5>
+            <div className="cart_desc text-dark">
+              <h3>{product.title}</h3>
+              <h5>{product.price}</h5>
+              <h6>QTY: {product.qty}</h6>
             </div>
             <div className="cart_action">
               <button
