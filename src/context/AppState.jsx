@@ -138,6 +138,55 @@ const AppState = (props) => {
 
     setCart(api.data.cart);
   };
+
+  // decrease qty
+  const decreaseQty = async (productId, qty) => {
+    const api = await axios.post(
+      `${url}/cart/decreaseQty`,
+      { productId, qty },
+      {
+        headers: { "Content-Type": "Application/json", Auth: token },
+        withCredentials: true,
+      }
+    );
+    toast.success(api.data.message, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+    setReload(!reload);
+  };
+
+  // remove product
+  const removeProduct = async (productId) => {
+    const api = await axios.delete(
+      `${url}/cart/remove/${productId}`,
+
+      {
+        headers: { "Content-Type": "Application/json", Auth: token },
+        withCredentials: true,
+      }
+    );
+    toast.success(api.data.message, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+    setReload(!reload);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -154,6 +203,8 @@ const AppState = (props) => {
         user,
         addToCart,
         cart,
+        decreaseQty,
+        removeProduct,
       }}
     >
       {props.children}

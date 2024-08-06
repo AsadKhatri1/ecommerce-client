@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
 
 const Cart = () => {
-  const { cart } = useContext(AppContext);
+  const { cart, decreaseQty, addToCart, removeProduct } =
+    useContext(AppContext);
   const [qty, setQty] = useState(0);
   const [price, setPrice] = useState(0);
 
@@ -26,6 +27,7 @@ const Cart = () => {
         <div
           key={product._id}
           className="container bg-dark my-5 p-3 text-center"
+          style={{ borderRadius: "8px" }}
         >
           <div className="d-flex align-items-center justify-content-around">
             <div className="cart_img">
@@ -41,14 +43,41 @@ const Cart = () => {
               <h5>QTY: {product.qty}</h5>
             </div>
             <div className="cart_action">
-              <button className="btn btn-primary mx-1">QTY +</button>
-              <button className="btn btn-warning mx-1">QTY -</button>
-              <button className="btn btn-danger mx-1">REMOVE</button>
+              <button
+                className="btn btn-primary mx-1"
+                onClick={() =>
+                  addToCart(
+                    product?.productId,
+                    product.title,
+                    1,
+                    product.price / product.qty,
+                    product.imgSrc
+                  )
+                }
+              >
+                +
+              </button>
+              <button
+                className="btn btn-warning mx-1"
+                onClick={() => decreaseQty(product?.productId, 1)}
+              >
+                -
+              </button>
+              <button
+                className="btn btn-danger mx-1"
+                onClick={() => {
+                  if (confirm("Are you sure you want to remove?")) {
+                    removeProduct(product?.productId);
+                  }
+                }}
+              >
+                REMOVE
+              </button>
             </div>
           </div>
         </div>
       ))}
-      <div className="container text-center">
+      <div className="container text-center my-3">
         <button className="btn btn-success mx-2">Total Items: {qty}</button>
         <button className="btn btn-primary mx-2">
           Total Price: Rs.{" "}
