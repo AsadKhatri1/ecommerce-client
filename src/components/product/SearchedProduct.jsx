@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import AppContext from "../../context/AppContext";
 
 const SearchedProduct = () => {
-  const { products } = useContext(AppContext);
+  const { products, addToCart } = useContext(AppContext);
   const { term } = useParams();
   const searched = products.filter((product) => {
     return (
@@ -29,8 +29,13 @@ const SearchedProduct = () => {
                 className=" my-3 col-md-4 d-flex align-items-center justify-content-center "
               >
                 <div
-                  className="card bg-dark text-light text-center p-3"
-                  style={{ width: "18rem" }}
+                  className="card bg-light text-dark mb-5 pt-4 p-1 text-center"
+                  style={{
+                    borderRadius: "8px",
+                    width: "18rem",
+                    boxShadow:
+                      "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px",
+                  }}
                 >
                   <div className="d-flex align-items-center justify-content-center">
                     <Link to={`/product/${product._id}`}>
@@ -55,7 +60,18 @@ const SearchedProduct = () => {
                       <button className="btn btn-primary mx-1">
                         Rs. {product.price}
                       </button>
-                      <button className="btn btn-warning mx-1">
+                      <button
+                        className="btn btn-warning mx-1"
+                        onClick={() =>
+                          addToCart(
+                            product._id,
+                            product.title,
+                            1,
+                            product.price,
+                            product.imgSrc
+                          )
+                        }
+                      >
                         Add To cart
                       </button>
                     </div>

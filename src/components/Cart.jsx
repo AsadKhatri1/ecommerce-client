@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
 
 const Cart = () => {
-  const { cart, decreaseQty, addToCart, removeProduct } =
+  const { cart, decreaseQty, addToCart, removeProduct, clearCart } =
     useContext(AppContext);
   const [qty, setQty] = useState(0);
   const [price, setPrice] = useState(0);
@@ -95,6 +95,21 @@ const Cart = () => {
           </span>
         </button>
       </div>
+      {cart?.items.length > 0 && (
+        <div className="container text-center my-3">
+          <button className="btn btn-warning mx-2">Checkout</button>
+          <button
+            className="btn btn-danger mx-2"
+            onClick={() => {
+              if (confirm("Are you sure to clear cart?")) {
+                clearCart();
+              }
+            }}
+          >
+            Clear Cart
+          </button>
+        </div>
+      )}
     </div>
   );
 };
