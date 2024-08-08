@@ -12,6 +12,7 @@ const AppState = (props) => {
   const [filterData, setFilterData] = useState([]);
   const [user, setUser] = useState();
   const [cart, setCart] = useState();
+  const [userAddress, setUserAddress] = useState({});
   const [reload, setReload] = useState(false);
 
   //   fetching all products as data value to context
@@ -27,6 +28,7 @@ const AppState = (props) => {
     };
     userProfile();
     fetchProducts();
+    getAddress();
     userCart();
   }, [token, reload]);
 
@@ -209,6 +211,49 @@ const AppState = (props) => {
     });
     setReload(!reload);
   };
+  //add address
+  const addAddress = async (
+    fullname,
+    address,
+    city,
+    country,
+    pincode,
+    phoneNumber,
+    state
+  ) => {
+    const api = await axios.post(
+      `${url}/address/add`,
+      { fullname, address, city, country, pincode, phoneNumber, state },
+
+      {
+        headers: { "Content-Type": "Application/json", Auth: token },
+        withCredentials: true,
+      }
+    );
+    toast.success(api.data.message, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      transition: Bounce,
+    });
+    setReload(!reload);
+    return api.data;
+  };
+
+  // get latest user address
+  const getAddress = async () => {
+    const api = await axios.get(`${url}/address/get`, {
+      headers: { "Content-Type": "Application/json", Auth: token },
+      withCredentials: true,
+    });
+
+    setUserAddress(api.data.address);
+  };
 
   return (
     <AppContext.Provider
@@ -229,6 +274,8 @@ const AppState = (props) => {
         decreaseQty,
         removeProduct,
         clearCart,
+        addAddress,
+        userAddress,
       }}
     >
       {props.children}

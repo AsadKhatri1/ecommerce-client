@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
+import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { cart, decreaseQty, addToCart, removeProduct, clearCart } =
     useContext(AppContext);
   const [qty, setQty] = useState(0);
   const [price, setPrice] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let qty = 0;
@@ -23,6 +25,18 @@ const Cart = () => {
 
   return (
     <div>
+      {cart.items.length < 1 && (
+        <div className="container text-center my-3">
+          <h2 className="text-danger">Your cart is empty</h2>
+          <Link
+            to="/"
+            className="btn btn-warning"
+            style={{ borderRadius: "12px" }}
+          >
+            Continue Shopping...
+          </Link>
+        </div>
+      )}
       {cart?.items?.map((product) => (
         <div
           key={product._id}
@@ -86,18 +100,27 @@ const Cart = () => {
           </div>
         </div>
       ))}
-      <div className="container text-center my-3">
-        <button className="btn btn-success mx-2">Total Items: {qty}</button>
-        <button className="btn btn-primary mx-2">
-          Total Price: Rs.{" "}
-          <span className="fw-bold" style={{ fontWeight: "bold" }}>
-            {price}
-          </span>
-        </button>
-      </div>
+
+      {cart.items.length > 0 && (
+        <div className="container text-center my-3">
+          <button className="btn btn-success mx-2">Total Items: {qty}</button>
+          <button className="btn btn-primary mx-2">
+            Total Price: Rs.{" "}
+            <span className="fw-bold" style={{ fontWeight: "bold" }}>
+              {price}
+            </span>
+          </button>
+        </div>
+      )}
+
       {cart?.items.length > 0 && (
         <div className="container text-center my-3">
-          <button className="btn btn-warning mx-2">Checkout</button>
+          <button
+            className="btn btn-warning mx-2"
+            onClick={() => navigate("/address")}
+          >
+            Checkout
+          </button>
           <button
             className="btn btn-danger mx-2"
             onClick={() => {

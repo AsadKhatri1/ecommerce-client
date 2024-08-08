@@ -48,9 +48,11 @@ const Navbar = () => {
                   type="button"
                   className="btn btn-primary position-relative mx-3"
                 >
-                  <span class="material-symbols-outlined">shopping_cart</span>
+                  <span className="material-symbols-outlined">
+                    shopping_cart
+                  </span>
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {cart?.items.length}
+                    {cart?.items.length > 0 ? cart.items.length : <></>}
                   </span>
                 </Link>
 

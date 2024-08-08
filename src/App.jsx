@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProductDetail from "./components/product/ProductDetail";
 import Navbar from "./components/Navbar";
 import Cart from "./components/Cart";
+import Address from "./components/Address";
 import SearchedProduct from "./components/product/SearchedProduct";
 import Register from "./components/user/Register";
 
@@ -14,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/user/Login";
 import Profile from "./components/user/Profile";
+import Checkout from "./components/Checkout";
 function App() {
   return (
     <>
@@ -26,6 +28,8 @@ function App() {
           <Route path="/login" element={<Login></Login>}></Route>
           <Route path="/profile" element={<Profile></Profile>}></Route>
           <Route path="/cart" element={<Cart></Cart>}></Route>
+          <Route path="/address" element={<Address></Address>}></Route>
+          <Route path="/checkout" element={<Checkout></Checkout>}></Route>
           <Route
             path="/product/:id"
             element={<ProductDetail></ProductDetail>}
